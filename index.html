@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Login | Vikram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3, #ff4d79);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 270px;
+            background: linear-gradient(135deg, #ff4d79, #ff2357);
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 270px;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -150px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 150px;
+            top: 0;
+        }
+
+        #login-form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: white;
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            font-size: 18px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        button {
+            background: #ff2357;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #ff4d79;
+            transform: scale(1.1);
+        }
+
+        /* Floating hearts animation */
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-20px); opacity: 0.8; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            color: rgba(255, 77, 121, 0.6);
+            animation: float 3s infinite ease-in-out;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="heart"></div>
+
+    <form id="login-form">
+        <h2>Enter Your Love Name</h2>
+        <input type="text" id="love-name" placeholder="Your Name">
+        <button id="submit-btn">Login</button>
+    </form>
+
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('love-name').value.trim();
+            if (nameInput.toLowerCase() === "Baby") {
+                alert("Welcome, My Love ❤️");
+                window.location.href = "main.html"; // Redirect to another page
+            } else {
+                alert("You are not my Love 😢");
+            }
+        });
+
+        function createFloatingHeart() {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("floating-heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createFloatingHeart, 600);
+    </script>
+
+</body>
+</html>
